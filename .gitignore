@@ -51,3 +51,6 @@ Temporary Items
 .idea/scopes/scope_settings.xml
 .project
 .pydevproject
+*.pyc
+.idea/dictionaries/Administrator.xml
+
