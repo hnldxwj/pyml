@@ -1,0 +1,18 @@
+1.
+import the file:
+  from ML import kNN
+
+2.
+prepare the trainning file,testing file
+  format:
+  label val1 val2 val3....
+  such as 1 231 2141 123
+  1 means the label (or the type)
+  231,2141,123 are the key value
+
+3.
+  static method: kNN.calc(trainfile,testfile,outputfile,k)
+trainfile == trainning file name, such as "train.txt"
+testfile  == testing file name, such as "test.txt"
+outputfile == result file location,such as "result.txt"
+k ==kNN 's param, define the scope
