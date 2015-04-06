@@ -1,2 +1,4 @@
+2015.4.6
+Finish kNN / 1st version
 2015.4.4
 Today I start this project
