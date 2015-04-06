@@ -2,6 +2,7 @@
 Created on 2015-4-5
 @author: hnldxwj
 '''
+from __future__ import division
 import  copy
 class FileImport:
 

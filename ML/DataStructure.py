@@ -27,7 +27,9 @@ class BinarySearchArray:
             else:
                 self.size+=1
             return True
-
+        if self.size==self.maxsize:
+            if (self.type==0 and Node.val<self.list[self.size-1].val) or (self.type==1 and Node.val>self.list[self.size-1].val):
+                return False
 
 
         start=0

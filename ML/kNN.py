@@ -30,6 +30,7 @@ class kNN:
        def calcOneCase(trainset,testrow,k):
 
            bsa=BinarySearchArray(k)
+           bsa.setType(1)
            for trainrow in trainset:
                distance=kNN.calcDistance(trainrow,testrow)
                node=Node(distance,trainrow[0])
