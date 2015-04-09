@@ -1,7 +1,7 @@
 class NaiveBayesian:
 
     @staticmethod
-    def loadDataSet:
+    def loadDataSet():
 
         return
 
@@ -22,5 +22,5 @@ class NaiveBayesian:
                 returnArray[dataSet.index(word)]=1
         return returnArray
 
-    @staticmethod
-    def
+    #@staticmethod
+    #def
