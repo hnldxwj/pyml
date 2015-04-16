@@ -22,5 +22,28 @@ class NaiveBayesian:
                 returnArray[dataSet.index(word)]=1
         return returnArray
 
-    #@staticmethod
-    #def
+
+    @staticmethod
+    def findAllFeature(dataSet,index):
+        theList=[ x[index] for x in dataSet]
+        theSet=set(theList)
+        return theSet
+
+    # calc every P(label|feature)
+    @staticmethod
+    def findLabel2Feature(dataSet,index,feature):
+        possible={}
+        for l in dataSet:
+            if l[index]==feature:
+                if possible.get(l[0])!=None:
+                    possible[l[0]]+=1
+                else:
+                    possible[l[0]]=1
+
+        count=0
+        for label,val in possible:
+            count+=val
+        res={}
+        for label,val in possible:
+            res[label]=val*1.00/count
+        return res
