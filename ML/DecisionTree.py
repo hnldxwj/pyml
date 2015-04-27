@@ -4,6 +4,7 @@ Created on 2015-4-6
 '''
 from math import log
 from __future__ import division
+from ML import FileImport
 class DecisionTree:
 
     @staticmethod
@@ -86,5 +87,26 @@ class DecisionTree:
         for val in bestColumnValSet:
             tree[bestColumn][val]=DecisionTree.createTree(DecisionTree.splitDataSet(dataSet,bestColumn,val))
         return tree
+
+
+    @staticmethod
+    def findDecisonTreeResult(tree,test):
+
+        return
+
+
+    @staticmethod
+    def calc(trainfile,testfile,outputfile):
+
+        trainset=FileImport.file2matrix(trainfile)
+        testset=FileImport.file2matrix(testfile)
+        fw=open(outputfile,'w')
+        tree=DecisionTree.createTree(trainset)
+        for row in testset:
+            result=DecisionTree.findDecisonTreeResult(tree,row)
+            #print "result:"+str(result)
+            fw.write(str(result)+"\n")
+        fw.close()
+        return True
             
         
