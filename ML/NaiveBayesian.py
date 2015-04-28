@@ -1,3 +1,4 @@
+from FileImport import FileImport
 class NaiveBayesian:
 
     @staticmethod
@@ -47,3 +48,33 @@ class NaiveBayesian:
         for label,val in possible:
             res[label]=val*1.00/count
         return res
+
+
+    @staticmethod
+    def findBiggestPosibility(model,test):
+
+        return
+
+
+    @staticmethod
+    def calc(trainfile,testfile,outputfile):
+
+        trainset=FileImport.file2matrix(trainfile)
+        testset=FileImport.file2matrix(testfile)
+        fw=open(outputfile,'w')
+
+        # model(list)-->index(dict)--> feature(dict)--> label(posiibility)
+        model=[]
+        for i in range(trainset[0]):
+            featureset=NaiveBayesian.findAllFeature(trainset,i)
+            index={}
+            for f in featureset:
+                index[f]=(NaiveBayesian.findLabel2Feature(trainset,i,f))
+            model.append(index)
+
+        for row in testset:
+            result=NaiveBayesian.findBiggestPosibility(model,row)
+            #print "result:"+str(result)
+            fw.write(str(result)+"\n")
+        fw.close()
+        return True

@@ -3,8 +3,11 @@ Created on 2015-4-6
 @author: hnldxwj
 '''
 from math import log
+import types
 from __future__ import division
 from ML import FileImport
+
+
 class DecisionTree:
 
     @staticmethod
@@ -91,8 +94,19 @@ class DecisionTree:
 
     @staticmethod
     def findDecisonTreeResult(tree,test):
+        while True:
+            if len(tree.keys())==1:
+                l=tree.keys()
+                bestindex=int(l[0])
+                res=tree[str(bestindex)][test[bestindex]]
+                if type(res) is types.StringType:
+                    return res
+                else:
+                    tree=res
+            else:
+                return False
 
-        return
+        return False
 
 
     @staticmethod
