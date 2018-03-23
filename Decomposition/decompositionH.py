@@ -1,17 +1,17 @@
 # -*- coding:utf-8 -*-
 import os
-dir = "J:\\Seq"
+dir = "J:\\Seq\\DrivingInCity_3840x1920_30fps_8bit_420\\"
 width=3840
 height=1920
 number=10#帧数
 Ysize=width*height
 UVsize=Ysize>>2
-partsCount=4
-
+partsCount=8
 #暂时储存的四个部分的yuv
 Ybuffer=[bytearray(Ysize/partsCount) for y in range(partsCount)]
 Ubuffer=[bytearray(UVsize/partsCount) for y in range(partsCount)]
 Vbuffer=[bytearray(UVsize/partsCount) for y in range(partsCount)]
+
 #对于文件夹下每一个文件
 for root, dirs, files in os.walk(dir):
     for filename in files:
@@ -21,9 +21,9 @@ for root, dirs, files in os.walk(dir):
         #fulloutputfilepath=os.path.join(root,file)+".full.yuv"
         #fulloutputfile=open(fulloutputfilepath,"w")
         for x in range(12):#总共要处理的份数
-            d4outputfilepath=os.path.join(root,filename)+"-"+str(x)+"-10fd4.yuv"
+            d4outputfilepath=os.path.join(root,filename)+"-"+str(x)+"-"+str(number)+"fd"+str(partsCount)+".yuv"
             d4outputfile=open(d4outputfilepath,"wb")
-            orig4outputfilepath=os.path.join(root,filename)+"-"+str(x)+"-10forig4.yuv"
+            orig4outputfilepath=os.path.join(root,filename)+"-"+str(x)+"-"+str(number)+"forig4.yuv"
             orig4outputfile=open(orig4outputfilepath,"wb")
             for y in range(number):#处理该文件的number帧
                 #读取一帧的Y部分
@@ -61,7 +61,8 @@ for root, dirs, files in os.walk(dir):
             #处理完number帧
             d4outputfile.close()
             orig4outputfile.close()
-
+        file.close()
+        exit()
 
 
 

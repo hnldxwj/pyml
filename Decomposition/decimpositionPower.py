@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 import os
-dir = "J:\\Seq"
+dir = "J:\\Seq\\DrivingInCity_3840x1920_30fps_8bit_420\\"
 width=3840
 height=1920
 number=10#帧数
@@ -18,47 +18,54 @@ for root, dirs, files in os.walk(dir):
         file=open(os.path.join(root,filename),"rb")
 
         for x in range(12):#总共要处理的份数
-            d4outputfilepath=os.path.join(root,file)+"-"+str(x)+"-10fpowerd4.yuv"
+            d4outputfilepath=os.path.join(root,filename)+"-"+str(x)+"-10fpowerd4.yuv"
             d4outputfile=open(d4outputfilepath,"wb")
             for y in range(number):#处理该文件的number帧
                 #读取一帧的Y部分
                 lines=file.read(Ysize)
                 pos=0
+                line=0
                 while pos <Ysize:
-                    for w in range(width):
+                    for w in range(width/2):
                         for partNum in range(2):
-                            Ybuffer[partNum][pos/2]=lines[pos]
+                            Ybuffer[partNum][(line/2)*(width/2)+(pos-line*width)/2]=lines[pos]
                             pos=pos+1
-                    for w in range(width):
+                    line=line+1
+                    for w in range(width/2):
                         for partNum in range(2,4):
-                            Ybuffer[partNum][pos/2+2]=lines[pos]
+                            Ybuffer[partNum][(line/2)*(width/2)+(pos-line*width)/2]=lines[pos]
                             pos=pos+1
-
+                    line = line + 1
                 #读取一帧的U部分
                 lines=file.read(UVsize)
                 pos=0
+                line=1
                 while pos <UVsize:
                     for w in range(width/2):
                         for partNum in range(2):
-                            Ubuffer[partNum][pos/2]=lines[pos]
+                            Ubuffer[partNum][(line/2)*(width/2)+(pos-line*width)/2]=lines[pos]
                             pos=pos+1
+                    line = line + 1
                     for w in range(width/2):
                         for partNum in range(2,4):
-                            Ubuffer[partNum][pos/2+2]=lines[pos]
+                            Ubuffer[partNum][(line/2)*(width/2)+(pos-line*width)/2]=lines[pos]
                             pos=pos+1
-                
+                    line=line+1
                 #读取一帧的V部分
                 lines=file.read(UVsize)
                 pos=0
+                line=0
                 while pos <UVsize:
                     for w in range(width/2):
                         for partNum in range(2):
-                            Vbuffer[partNum][pos/2]=lines[pos]
+                            Vbuffer[partNum][(line/2)*(width/2)+(pos-line*width)/2]=lines[pos]
                             pos=pos+1
+                    line = line + 1
                     for w in range(width/2):
                         for partNum in range(2,4):
-                            Vbuffer[partNum][pos/2+2]=lines[pos]
+                            Vbuffer[partNum][(line/2)*(width/2)+(pos-line*width)/2]=lines[pos]
                             pos=pos+1
+                    line = line + 1
                 #把这一帧decomposition出的partsCount帧写入
                 for partNum in range(partsCount):
                     d4outputfile.write(Ybuffer[partNum])
@@ -66,7 +73,5 @@ for root, dirs, files in os.walk(dir):
                     d4outputfile.write(Vbuffer[partNum])
             #处理完number帧
             d4outputfile.close()
-
-
-
-
+        file.close()
+        break
