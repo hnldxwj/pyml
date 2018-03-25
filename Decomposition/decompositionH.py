@@ -3,10 +3,10 @@ import os
 dir = "J:\\Seq\\DrivingInCity_3840x1920_30fps_8bit_420\\"
 width=3840
 height=1920
-number=10#帧数
+number=120#帧数
 Ysize=width*height
 UVsize=Ysize>>2
-partsCount=8
+partsCount=2
 #暂时储存的四个部分的yuv
 Ybuffer=[bytearray(Ysize/partsCount) for y in range(partsCount)]
 Ubuffer=[bytearray(UVsize/partsCount) for y in range(partsCount)]
@@ -15,12 +15,14 @@ Vbuffer=[bytearray(UVsize/partsCount) for y in range(partsCount)]
 #对于文件夹下每一个文件
 for root, dirs, files in os.walk(dir):
     for filename in files:
+        if not filename.endswith("erp.yuv"):
+            break
         print os.path.join(root,filename)
         file=open(os.path.join(root,filename),"rb")
         #full另写一个py处理吧 需要比较1s的、2s、4s的切片
         #fulloutputfilepath=os.path.join(root,file)+".full.yuv"
         #fulloutputfile=open(fulloutputfilepath,"w")
-        for x in range(12):#总共要处理的份数
+        for x in range(120/number):#总共要处理的份数
             d4outputfilepath=os.path.join(root,filename)+"-"+str(x)+"-"+str(number)+"fd"+str(partsCount)+".yuv"
             d4outputfile=open(d4outputfilepath,"wb")
             orig4outputfilepath=os.path.join(root,filename)+"-"+str(x)+"-"+str(number)+"forig4.yuv"
@@ -62,7 +64,6 @@ for root, dirs, files in os.walk(dir):
             d4outputfile.close()
             orig4outputfile.close()
         file.close()
-        exit()
 
 
 
