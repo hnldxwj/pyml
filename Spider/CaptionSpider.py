@@ -7,22 +7,22 @@ from datetime import datetime
 import requests
 
 
-def spider_zimuku(data):
+def spider_zimuku(param):
     # https://www.zimuku.cn/search?q=使女的故事
-    url = "https://www.zimuku.cn/search"
-    content = urllib.urlopen(url, data)
+    url = "https://www.zimuku.cn/search?q={}".format(param)
+    print url
+    response = urllib.urlopen(url)
+    content=response.read()
     return content
-
 
 if __name__ == '__main__':
     print "Start!"
     start = datetime.now()
     print start
 
-    movie_name = [{'q': '使女的故事'}]
+    movie_name = ['使女的故事']
     for x in range(len(movie_name)):
-        data = bytes(urllib.urlencode(movie_name[x]))
-        print spider_zimuku(data)
+        print spider_zimuku(movie_name[x])
 
     print "The end"
     end = datetime.now()
